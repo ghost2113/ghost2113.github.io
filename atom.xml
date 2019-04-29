@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>让优秀成为一种习惯</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-04-29T14:36:35.611Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Mr.Tian</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mr.tian</title>
+    <link href="http://yoursite.com/2018/09/12/Mr-tian/"/>
+    <id>http://yoursite.com/2018/09/12/Mr-tian/</id>
+    <published>2018-09-12T14:32:07.000Z</published>
+    <updated>2019-04-29T14:36:35.611Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="tags" scheme="http://yoursite.com/tags/tags/"/>
+    
+      <category term="html" scheme="http://yoursite.com/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mr.tian</title>
+    <link href="http://yoursite.com/2018/09/12/react+redux/"/>
+    <id>http://yoursite.com/2018/09/12/react+redux/</id>
+    <published>2018-09-12T14:32:07.000Z</published>
+    <updated>2018-09-16T11:26:47.006Z</updated>
+    
+    <content type="html"><![CDATA[<p>#react+redux开发</p><p>##1 前端常用工具</p><p>##2 工程架构</p><h3 id="2-1-webpack架构简介"><a href="#2-1-webpack架构简介" class="headerlink" title="2.1 webpack架构简介"></a>2.1 webpack架构简介</h3><p>###2.2 web开发网络优化</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;#react+redux开发&lt;/p&gt;
+&lt;p&gt;##1 前端常用工具&lt;/p&gt;
+&lt;p&gt;##2 工程架构&lt;/p&gt;
+&lt;h3 id=&quot;2-1-webpack架构简介&quot;&gt;&lt;a href=&quot;#2-1-webpack架构简介&quot; class=&quot;headerlink&quot; title=&quot;2.1 we
+      
+    
+    </summary>
+    
+    
+      <category term="emotion" scheme="http://yoursite.com/tags/emotion/"/>
+    
+  </entry>
+  
+</feed>
