@@ -90,7 +90,7 @@
 <meta property="og:description" content="执行上下文：当前javascript代码被解析和执行所在环境的抽象概念">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/5/166e258e1d0281a6?imageslim">
-<meta property="og:updated_time" content="2019-05-06T14:25:03.775Z">
+<meta property="og:updated_time" content="2019-05-06T14:29:21.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1.1 执行上下文栈">
 <meta name="twitter:description" content="执行上下文：当前javascript代码被解析和执行所在环境的抽象概念">
@@ -360,13 +360,13 @@
       
 
       
-        <h4 id="1-执行上下文："><a href="#1-执行上下文：" class="headerlink" title="1 执行上下文："></a>1 执行上下文：</h4><p>当前javascript代码被解析和执行所在环境的抽象概念</p>
-<h4 id="2-执行上下文类型："><a href="#2-执行上下文类型：" class="headerlink" title="2 执行上下文类型："></a>2 执行上下文类型：</h4><ol start="2">
+        <h4 id="执行上下文："><a href="#执行上下文：" class="headerlink" title="执行上下文："></a>执行上下文：</h4><p>当前javascript代码被解析和执行所在环境的抽象概念</p>
+<h4 id="执行上下文类型："><a href="#执行上下文类型：" class="headerlink" title="执行上下文类型："></a>执行上下文类型：</h4><ol start="2">
 <li><strong>全局执行上下文</strong>：只有一个，浏览器中的全局对象就是 window 对象，this 指向这个全局对象</li>
 <li><strong>函数执行上下文</strong>：存在无数个,只有在函数被调用的时候才会被创建,每次调用函数就会创建一个新的执行上下文</li>
 <li><strong>Eval执行上下文</strong>: eval()函数中的代码,很少用而且不建议使用</li>
 </ol>
-<h4 id="3-执行栈"><a href="#3-执行栈" class="headerlink" title="3 执行栈:"></a>3 执行栈:</h4><p>也叫调用栈，具有后进先出（LIFO）的结构，用于存储代码在执行期间创建的所有的执行上下文</p>
+<h4 id="执行栈"><a href="#执行栈" class="headerlink" title="执行栈:"></a>执行栈:</h4><p>也叫调用栈，具有后进先出（LIFO）的结构，用于存储代码在执行期间创建的所有的执行上下文</p>
 <p>首次运行JS代码时，会创建一个<strong>全局执行上下文</strong>并Push到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个新的<strong>函数执行上下文</strong>并Push到当前执行栈的栈顶。</p>
 <p>根据执行栈LIFO规则，当栈顶函数运行完成后，其对应的函数执行上下文将会从执行栈中Pop出，上下文控制权将移到当前执行栈的下一个执行上下文。</p>
 <pre><code>var a = &apos;1&apos;;
@@ -389,9 +389,9 @@ console.log(&apos;Inside Global Execution Context&apos;);
 // Again inside first function
 // Inside Global Execution Context
 </code></pre><p><img src="https://user-gold-cdn.xitu.io/2018/11/5/166e258e1d0281a6?imageslim" alt=""></p>
-<h4 id="4-执行上下文的创建"><a href="#4-执行上下文的创建" class="headerlink" title="4 执行上下文的创建:"></a>4 执行上下文的创建:</h4><p>执行上下文的创建分为两个阶段：</p>
+<h4 id="执行上下文的创建"><a href="#执行上下文的创建" class="headerlink" title="执行上下文的创建:"></a>执行上下文的创建:</h4><p>执行上下文的创建分为两个阶段：</p>
 <p><strong>1）创建阶段<br>2）执行阶段</strong></p>
-<h5 id="4-1-创建阶段"><a href="#4-1-创建阶段" class="headerlink" title="4.1 创建阶段"></a>4.1 创建阶段</h5><ol>
+<h5 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h5><ol>
 <li><p>确定this</p>
 <pre><code>全局执行上下文中,this指向全局对象，浏览器中this-&gt;windows对象，nodejs中-&gt; 文件的module对象
 </code></pre></li>
@@ -407,7 +407,7 @@ console.log(&apos;Inside Global Execution Context&apos;);
 </code></pre></li>
 </ol>
 <p><strong>变量提升</strong>的原因：在创建阶段，函数声明存储在环境中，而变量会被设置为 undefined（在 var 的情况下）或保持未初始化（在 let 和 const 的情况下）。所以这就是为什么可以在声明之前访问 var 定义的变量（尽管是 undefined ），但如果在声明之前访问 let 和 const 定义的变量就会提示引用错误的原因。这就是所谓的变量提升。</p>
-<h5 id="4-2-执行阶段"><a href="#4-2-执行阶段" class="headerlink" title="4.2 执行阶段"></a>4.2 执行阶段</h5><pre><code>所有变量的分配，最后执行代码。
+<h5 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h5><pre><code>所有变量的分配，最后执行代码。
 </code></pre><p><strong>注：</strong> 在执行阶段，如果 Javascript 引擎在源代码中声明的实际位置找不到 let 变量的值，那么将为其分配 undefined 值。</p>
 
       
@@ -578,7 +578,7 @@ console.log(&apos;Inside Global Execution Context&apos;);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-执行上下文："><span class="nav-number">1.</span> <span class="nav-text">1 执行上下文：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-执行上下文类型："><span class="nav-number">2.</span> <span class="nav-text">2 执行上下文类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-执行栈"><span class="nav-number">3.</span> <span class="nav-text">3 执行栈:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-执行上下文的创建"><span class="nav-number">4.</span> <span class="nav-text">4 执行上下文的创建:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-创建阶段"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 创建阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-执行阶段"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 执行阶段</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文："><span class="nav-number">1.</span> <span class="nav-text">执行上下文：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文类型："><span class="nav-number">2.</span> <span class="nav-text">执行上下文类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行栈"><span class="nav-number">3.</span> <span class="nav-text">执行栈:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文的创建"><span class="nav-number">4.</span> <span class="nav-text">执行上下文的创建:</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建阶段"><span class="nav-number">4.1.</span> <span class="nav-text">创建阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行阶段"><span class="nav-number">4.2.</span> <span class="nav-text">执行阶段</span></a></li></ol></li></ol></div>
             
 
           </div>
