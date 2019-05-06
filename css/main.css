@@ -1738,6 +1738,7 @@ pre .javascript .function {
 .site-author-image {
   display: block;
   margin: 0 auto;
+  border-radius: 50%;
   padding: 2px;
   max-width: 120px;
   height: auto;
@@ -1823,7 +1824,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #04dbba;
+  background: #cc7506;
 }
 .links-of-blogroll {
   font-size: 13px;
