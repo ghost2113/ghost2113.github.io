@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="内存机制">
+<meta name="description" content="闭包">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.4 内存机制">
-<meta property="og:url" content="http://yoursite.com/2017/05/22/js学习笔记/1.4 内存机制/index.html">
+<meta property="og:title" content="2.1 理解闭包">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/js学习笔记/2.1 闭包的作用和优缺点/index.html">
 <meta property="og:site_name" content="让优秀成为一种习惯">
-<meta property="og:description" content="内存机制">
+<meta property="og:description" content="闭包">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-08T14:44:25.246Z">
+<meta property="og:updated_time" content="2019-05-14T14:07:16.123Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1.4 内存机制">
-<meta name="twitter:description" content="内存机制">
+<meta name="twitter:title" content="2.1 理解闭包">
+<meta name="twitter:description" content="闭包">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/22/js学习笔记/1.4 内存机制/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/13/js学习笔记/2.1 闭包的作用和优缺点/"/>
 
 
 
 
 
-  <title>1.4 内存机制 | 让优秀成为一种习惯</title>
+  <title>2.1 理解闭包 | 让优秀成为一种习惯</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/js学习笔记/1.4 内存机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/js学习笔记/2.1 闭包的作用和优缺点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mr.Tian">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1.4 内存机制</h1>
+          <h1 class="post-title" itemprop="name headline">2.1 理解闭包</h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T19:11:20+08:00">
-                2017-05-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-13T19:14:20+08:00">
+                2017-06-13
               </time>
             
 
@@ -341,7 +341,7 @@
 
           
               <div class="post-description">
-                  内存机制
+                  闭包
               </div>
           
 
@@ -358,83 +358,41 @@
       
 
       
-        <h4 id="JS内存空间"><a href="#JS内存空间" class="headerlink" title="JS内存空间"></a>JS内存空间</h4><p><strong>栈内存（stack）</strong>：存放变量</p>
-<p><strong>堆内存（heap）</strong>：存放复杂对象</p>
-<p><strong>池</strong>（一般也归类栈中）：存放常量</p>
-<pre><code>function A() {
-  let a = 1
-  function B() {
-      console.log(a)
-  }
-  return B
-}
-</code></pre><h6 id="闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量"><a href="#闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量" class="headerlink" title="闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量"></a>闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量</h6><h4 id="内存回收"><a href="#内存回收" class="headerlink" title="内存回收"></a>内存回收</h4><p>js有自动垃圾回收机制，垃圾收集器会每个一段时间就执行一次释放操作，找出那些不在继续使用的值，然后释放其占用的内存。</p>
+        <p><strong>什么是闭包？闭包的优缺点？</strong></p>
+<p>闭包（closure）是javascript的一大难点，也是它的特色。很多高级应用都要依靠闭包来实现。</p>
+<h4 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h4><p>要理解闭包，首先要理解javascript的特殊的变量作用域。</p>
+<p>变量的作用域无非就两种：全局变量和局部变量。</p>
+<p><strong>javascript语言的特别之处就在于：</strong></p>
+<p>函数内部可以直接读取全局变量，但是在函数外部无法读取函数内部的局部变量。</p>
+<p>注意点：在函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明的是一个全局变量！</p>
+<h4 id="如何从外部读取函数内部的局部变量？"><a href="#如何从外部读取函数内部的局部变量？" class="headerlink" title="如何从外部读取函数内部的局部变量？"></a>如何从外部读取函数内部的局部变量？</h4><p>出于种种原因，我们有时候需要获取到函数内部的局部变量。但是，上面已经说过了，正常情况下，这是办不到的！只有通过变通的方法才能实现。</p>
+<p>那就是在函数内部，再定义一个函数。</p>
+<pre><code>function f1(){
+　　　　var n=999;
+
+　　　　function f2(){
+　　　　　　alert(n); // 999
+　　　　}
+　　}
+</code></pre><p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1就是不可见的。</p>
+<p>这就是Javascript语言特有的”链式作用域”结构（chain scope），</p>
+<p>子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。</p>
+<p>既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！</p>
+<h4 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h4><p>上面代码中的f2函数，就是闭包。</p>
+<p>各种专业文献的闭包定义都非常抽象，我的理解是: 闭包就是能够读取其他函数内部变量的函数。</p>
+<p>由于在javascript中，只有函数内部的子函数才能读取局部变量，所以说，闭包可以简单理解成“定义在一个函数内部的函数“。</p>
+<p>所以，在本质上，闭包是将函数内部和函数外部连接起来的桥梁。</p>
+<h4 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h4><p>闭包可以用在许多地方。它的最大用处有两个，</p>
 <ol>
-<li>局部变量和全局变量的销毁</li>
+<li><p>一个是前面提到的可以读取函数内部的变量</p>
+</li>
+<li><p>另一个就是让这些变量的值始终保持在内存中，不会在f1调用后被自动清除</p>
+</li>
 </ol>
-<p><strong>局部变量：</strong>局部作用域中，当函数执行完毕，局部变量也就没有存在的必要了，因此垃圾收集器很容易做出判断并回收。</p>
-<p><strong>全局变量：</strong>全局变量什么时候需要自动释放内存空间则很难判断，所以在开发中尽量避免使用全局变量</p>
-<ol start="2">
-<li>以Google的V8引擎为例，V8引擎中的所有的JS独享都是通过对来金鹰内粗分配的</li>
-</ol>
-<p><strong>初始分配</strong>：声明变量并赋值时，V8引擎就会在堆内存中分配给这个变量</p>
-<p><strong>继续申请</strong>：当已申请的内存不足以存储这个变量时，V8引擎就会继续申请内存，直到堆的大小达到了V8引擎的内存上限为止</p>
-<ol start="3">
-<li>V8引擎对堆内存中的JS对象进行分代管理</li>
-</ol>
-<p><strong>新生代</strong>：存活周期较短的JS对象，如临时变量、字符串等。<br><strong>老生代</strong>：经过多次垃圾回收仍然存活，存活周期较长的对象，如主控制器、服务器对象等。</p>
-<h4 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h4><p>对垃圾回收算法来说，核心思想就是如何判断内存已经不使用了，常用垃圾回收算法：</p>
-<ul>
-<li>引用计数（现在浏览器不再使用）</li>
-<li>标记清除</li>
-</ul>
-<h5 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h5><p>引用计数算法定义“内存不再使用”的标准很简单，就是看一个对象是否有指向它的引用。如果没有其他对象指向它了，说明该对象已经不再需要了。</p>
-<pre><code>// 创建一个对象person，他有两个指向属性age和name的引用
-var person = {
-    age: 12,
-    name: &apos;aaaa&apos;
-};
-
-person.name = null; // 虽然name设置为null，但因为person对象还有指向name的引用，因此name不会回收
-
-var p = person; 
-person = 1; //原来的person对象被赋值为1，但因为有新引用p指向原person对象，因此它不会被回收
-
-p = null;   //原person对象已经没有引用，很快会被回收
-</code></pre><p>引用计数有一个致命问题就是<strong>循环引用</strong></p>
-<pre><code>cycle函数执行完成之后，对象o1和o2实际上已经不再需要了，但根据引用计数的原则，他们之间的相互引用依然存在，因此这部分内存不会被回收。所以现代浏览器不再使用这个算法。
-
-    function cycle() {
-        var o1 = {};
-        var o2 = {};
-        o1.a = o2;
-        o2.a = o1; 
-
-        return &quot;cycle reference!&quot;
-    }
-
-    cycle();
-</code></pre><p>如果两个对象相互引用，尽管他们已经不在使用，但是垃圾回收器不会进行回收，最终可能会导致内存泄漏。</p>
-<h4 id="标记清除"><a href="#标记清除" class="headerlink" title="标记清除"></a>标记清除</h4><p>标记清除将“将不再使用的队形”定义为无法到达的对象。即从根部（在JS中就是全局对象）出发定时扫描内存中的对象，凡是能从根部到达的对象，保留。那些从根部出发无法触及到的对象被标记为不再使用，稍后进行回收。</p>
-<p>对于主流浏览器来说，只需要切断需要回收的对象与根部的联系，就可以被垃圾回收机制回收</p>
-<pre><code>email.message = document.createElement(“div”);
-displayList.appendChild(email.message);
-
-// 稍后从displayList中清除DOM元素
-displayList.removeAllChildren();
-</code></pre><p>上面代码中，div元素已经从DOM树中清除，但是该div元素还绑定在email对象中，所以如果email对象存在，那么该div元素就会一直保存在内存中。</p>
-<h4 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h4><p>对于持续与逆行的服务进程，必须及时释放不在用到的内存废旧则内存占用的越来越高，轻则影响到系统性能，重则导致进程崩溃。对于不再用到的内存，没有及时释放，就叫做内存泄漏。</p>
-<h4 id="内存泄漏识别方法"><a href="#内存泄漏识别方法" class="headerlink" title="内存泄漏识别方法"></a>内存泄漏识别方法</h4><ol>
-<li>谷歌浏览器：Memory -&gt; Select profiling -&gt; timeline -&gt; start -&gt; stop</li>
-<li>node process.memoryUsage</li>
-</ol>
-<h4 id="WeakMap"><a href="#WeakMap" class="headerlink" title="WeakMap"></a>WeakMap</h4><p>ES6新的数据结构 WeakSet 和 WeakMap，表示这是弱引用，他们对于值的引用都是不计入垃圾回收机制的 </p>
-<pre><code>const wm = new WeakMap();
-const element = document.getElementById(&apos;example&apos;);
-
-wm.set(element, &apos;some information&apos;);
-wm.get(element) // &quot;some information&quot;
-</code></pre><p>先新建一个 Weakmap 实例，然后将一个 DOM 节点作为键名存入该实例，并将一些附加信息作为键值，一起存放在 WeakMap 里面。这时，WeakMap 里面对element的引用就是弱引用，不会被计入垃圾回收机制。</p>
+<p><strong>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</strong></p>
+<p>这段代码中另一个值得注意的地方，就是”nAdd=function(){n+=1}”这一行，首先在nAdd前面没有使用var关键字，因此nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
+<h4 id="使用闭包的注意点"><a href="#使用闭包的注意点" class="headerlink" title="使用闭包的注意点"></a>使用闭包的注意点</h4><p>（1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。</p>
+<p>（2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。</p>
 
       
     </div>
@@ -465,8 +423,8 @@ wm.get(element) // &quot;some information&quot;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/15/js学习笔记/1.3 栈堆队列理解/" rel="next" title="1.3 栈堆队列理解">
-                <i class="fa fa-chevron-left"></i> 1.3 栈堆队列理解
+              <a href="/2017/05/29/js学习笔记/1.5 内存泄漏如何避免/" rel="next" title="1.5 内存泄漏如何避免">
+                <i class="fa fa-chevron-left"></i> 1.5 内存泄漏如何避免
               </a>
             
           </div>
@@ -475,8 +433,8 @@ wm.get(element) // &quot;some information&quot;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/29/js学习笔记/1.5 内存泄漏如何避免/" rel="prev" title="1.5 内存泄漏如何避免">
-                1.5 内存泄漏如何避免 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/17/js学习笔记/2.2 从作用域的角度看闭包/" rel="prev" title="2.2 从作用域链的角度看闭包">
+                2.2 从作用域链的角度看闭包 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,7 +578,7 @@ wm.get(element) // &quot;some information&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS内存空间"><span class="nav-number">1.</span> <span class="nav-text">JS内存空间</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量"><span class="nav-number">1.0.1.</span> <span class="nav-text">闭包中变量保存在堆内存中，这也是为什么闭包可以访问到函数内的变量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存回收"><span class="nav-number">2.</span> <span class="nav-text">内存回收</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#引用计数"><span class="nav-number">3.1.</span> <span class="nav-text">引用计数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#标记清除"><span class="nav-number">4.</span> <span class="nav-text">标记清除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存泄漏"><span class="nav-number">5.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存泄漏识别方法"><span class="nav-number">6.</span> <span class="nav-text">内存泄漏识别方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WeakMap"><span class="nav-number">7.</span> <span class="nav-text">WeakMap</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量作用域"><span class="nav-number">1.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何从外部读取函数内部的局部变量？"><span class="nav-number">2.</span> <span class="nav-text">如何从外部读取函数内部的局部变量？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的概念"><span class="nav-number">3.</span> <span class="nav-text">闭包的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#闭包的用途"><span class="nav-number">4.</span> <span class="nav-text">闭包的用途</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用闭包的注意点"><span class="nav-number">5.</span> <span class="nav-text">使用闭包的注意点</span></a></li></ol></div>
             
 
           </div>
