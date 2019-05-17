@@ -104,6 +104,31 @@
     
     
     <entry>
+      <title>3.5 new</title>
+      <link href="/2017/08/21/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.5%20new/"/>
+      <url>/2017/08/21/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.5%20new/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> js学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>3.3 call和apply</title>
       <link href="/2017/08/21/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.3%20call%E5%92%8Capply/"/>
       <url>/2017/08/21/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.3%20call%E5%92%8Capply/</url>
@@ -129,9 +154,9 @@
     
     
     <entry>
-      <title>3.5 new</title>
-      <link href="/2017/08/11/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.5%20new/"/>
-      <url>/2017/08/11/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.5%20new/</url>
+      <title>3.4 bind</title>
+      <link href="/2017/08/20/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.4%20bind/"/>
+      <url>/2017/08/20/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.4%20bind/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -157,31 +182,6 @@
       <title>3.2 理解箭头函数中this</title>
       <link href="/2017/07/29/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.2%20%E7%90%86%E8%A7%A3%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%ADthis/"/>
       <url>/2017/07/29/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.2%20%E7%90%86%E8%A7%A3%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E4%B8%ADthis/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      <categories>
-          
-          <category> js学习笔记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> js </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>3.4 bind</title>
-      <link href="/2017/07/20/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.4%20bind/"/>
-      <url>/2017/07/20/js%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/3.4%20bind/</url>
       
         <content type="html"><![CDATA[]]></content>
       
@@ -411,6 +411,17 @@
     
     
     <entry>
+      <title>categories</title>
+      <link href="/categories/index.html"/>
+      <url>/categories/index.html</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>about</title>
       <link href="/about/index.html"/>
       <url>/about/index.html</url>
@@ -425,17 +436,6 @@
       <title>tags</title>
       <link href="/tags/index.html"/>
       <url>/tags/index.html</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>categories</title>
-      <link href="/categories/index.html"/>
-      <url>/categories/index.html</url>
       
         <content type="html"><![CDATA[]]></content>
       
