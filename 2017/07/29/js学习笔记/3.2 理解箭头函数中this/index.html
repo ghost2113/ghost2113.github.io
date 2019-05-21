@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="让优秀成为一种习惯">
 <meta property="og:description" content="this">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-17T12:55:17.019Z">
+<meta property="og:updated_time" content="2019-05-21T13:31:15.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="3.2 理解箭头函数中this">
 <meta name="twitter:description" content="this">
@@ -389,7 +389,136 @@
       
 
       
-        
+        <p>箭头函数的this：</p>
+<ol>
+<li><p>箭头函数不绑定this，箭头函数中的this相当于一个变量</p>
+</li>
+<li><p>箭头函数中this寻值行为与普通变量相同，在作用域中逐级寻找</p>
+</li>
+<li><p>箭头函数的this无法通过bind，call，apply来直接进行修改（可以通过改变箭头函数所在执行上下文的this进行间接修改，eg1）</p>
+</li>
+<li><p>改变作用域中的this指向可以改变箭头函数的this（eg1）</p>
+</li>
+</ol>
+<p><strong>eg1：</strong>  function closure(){()=&gt;{//code }}，在此例中，我们通过改变封包环境closure.bind(another)()，来改变箭头函数this的指向。</p>
+<pre><code>/**
+ * 非严格模式
+ */
+
+var name = &apos;window&apos;
+
+var person1 = {
+  name: &apos;person1&apos;,
+  show1: function () {
+console.log(this.name)
+  },
+  show2: () =&gt; console.log(this.name),
+  show3: function () {
+return function () {
+  console.log(this.name)
+}
+  },
+  show4: function () {
+return () =&gt; console.log(this.name)
+  }
+}
+var person2 = { name: &apos;person2&apos; }
+
+person1.show1()
+person1.show1.call(person2)
+
+person1.show2()
+person1.show2.call(person2)
+
+person1.show3()()
+person1.show3().call(person2)
+person1.show3.call(person2)()
+
+person1.show4()()
+person1.show4().call(person2)
+person1.show4.call(person2)()
+</code></pre><p><strong>结果：</strong></p>
+<pre><code>person1.show1() // person1，隐式绑定，this指向调用者 person1 
+person1.show1.call(person2) // person2，显式绑定，this指向 person2
+
+person1.show2() // window，箭头函数绑定，this指向外层作用域，即全局作用域
+person1.show2.call(person2) // window，箭头函数绑定，this指向外层作用域，即全局作用域
+
+person1.show3()() // window，默认绑定，这是一个高阶函数，调用者是window
+                  // 类似于`var func = person1.show3()` 执行`func()`
+person1.show3().call(person2) // person2，显式绑定，this指向 person2
+person1.show3.call(person2)() // window，默认绑定，调用者是window
+
+person1.show4()() // person1，箭头函数绑定，this指向外层作用域，即person1函数作用域
+person1.show4().call(person2) // person1，箭头函数绑定，
+                              // this指向外层作用域，即person1函数作用域
+person1.show4.call(person2)() // person2
+</code></pre><p>最后一个person1.show4.call(person2)()有点复杂，我们来一层一层的剥开。</p>
+<p>1、首先是var func1 = person1.show4.call(person2)，这是显式绑定，调用者是person2，show4函数指向的是person2。<br>2、然后是func1()，箭头函数绑定，this指向外层作用域，即person2函数作用域</p>
+<p>首先要说明的是，箭头函数绑定中，this指向外层作用域，并不一定是第一层，也不一定是第二层。<br>因为没有自身的this，所以只能根据作用域链往上层查找，直到找到一个绑定了this的函数作用域，并指向调用该普通函数的对象</p>
+<pre><code>/**
+ * 非严格模式
+ */
+
+var name = &apos;window&apos;
+
+function Person (name) {
+  this.name = name;
+  this.show1 = function () {
+console.log(this.name)
+  }
+  this.show2 = () =&gt; console.log(this.name)
+  this.show3 = function () {
+return function () {
+  console.log(this.name)
+}
+  }
+  this.show4 = function () {
+return () =&gt; console.log(this.name)
+  }
+}
+
+var personA = new Person(&apos;personA&apos;)
+var personB = new Person(&apos;personB&apos;)
+
+personA.show1()
+personA.show1.call(personB)
+
+personA.show2()
+personA.show2.call(personB)
+
+personA.show3()()
+personA.show3().call(personB)
+personA.show3.call(personB)()
+
+personA.show4()()
+personA.show4().call(personB)
+personA.show4.call(personB)()
+</code></pre><p><strong>结果：</strong></p>
+<pre><code>personA.show1() // personA，隐式绑定，调用者是 personA
+personA.show1.call(personB) // personB，显式绑定，调用者是 personB
+
+personA.show2() // personA，首先personA是new绑定，产生了新的构造函数作用域，
+                // 然后是箭头函数绑定，this指向外层作用域，即personA函数作用域
+personA.show2.call(personB) // personA，同上
+
+personA.show3()() // window，默认绑定，调用者是window
+personA.show3().call(personB) // personB，显式绑定，调用者是personB
+personA.show3.call(personB)() // window，默认绑定，调用者是window
+
+personA.show4()() // personA，箭头函数绑定，this指向外层作用域，即personA函数作用域
+personA.show4().call(personB) // personA，箭头函数绑定，call并没有改变外层作用域，
+                              // this指向外层作用域，即personA函数作用域
+personA.show4.call(personB)() // personB，解析同题目1，最后是箭头函数绑定，
+                              // this指向外层作用域，即改变后的person2函数作用域
+</code></pre><p><strong>总结：</strong></p>
+<pre><code>使用 new 操作符调用构造函数，实际上会经历一下4个步骤：
+
+创建一个新对象；
+将构造函数的作用域赋给新对象（因此this就指向了这个新对象）；
+执行构造函数中的代码（为这个新对象添加属性）；
+返回新对象。
+</code></pre>
       
     </div>
     
